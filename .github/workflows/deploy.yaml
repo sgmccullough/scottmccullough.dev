@@ -3,17 +3,30 @@ on:
   push:
     branches:
       - main
+permissions:
+      id-token: write
+      contents: read 
 jobs:
   deploy:
     name: deploy
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: install # will run `yarn install` command
+      - uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: build # will run `yarn build` command
+      - uses: borales/actions-yarn@v2.0.0
+        with:
+          cmd: test # will run `yarn test` command
       - name: Set AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           role-to-assume: ${{ secrets.AWS_ROLE }}
+          role-session-name: samplerolesession
           aws-region: us-east-1
-      - uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: deploy # will run `yarn deploy` command
+      - name: Copy to S3
+        run: |
+          aws s3 sync build/ s3://scottmccullough.dev
