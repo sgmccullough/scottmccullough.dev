@@ -1,0 +1,106 @@
+:root {
+  --bg: #0c0c0c;
+  --text: #d4d4d4;
+  --dim: #525252;
+  --green: #4ade80;
+  --accent: #22c55e;
+  --white: #fafafa;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'JetBrains Mono', 'Cascadia Code', 'Fira Code', monospace;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+main {
+  animation: fadein 0.5s ease both;
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.prompt-line {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2rem;
+  font-size: 0.875rem;
+}
+
+.prompt-path {
+  color: var(--dim);
+}
+
+.prompt-sym {
+  color: var(--green);
+}
+
+.cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1.15em;
+  background: var(--green);
+  animation: blink 1.1s step-end infinite;
+  vertical-align: text-bottom;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+h1 {
+  font-size: clamp(2.25rem, 5vw, 3.75rem);
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.03em;
+  line-height: 1;
+  margin-bottom: 0.6rem;
+}
+
+.role {
+  color: var(--accent);
+  font-size: 0.9rem;
+  font-weight: 400;
+  margin-bottom: 2.5rem;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.825rem;
+}
+
+.links a {
+  color: var(--dim);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.links a:hover {
+  color: var(--green);
+}
+
+.sep {
+  color: var(--dim);
+}
